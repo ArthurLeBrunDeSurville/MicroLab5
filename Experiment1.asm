@@ -1,3 +1,6 @@
+; Using ADC to measure voltage and display it on LCD
+
+
 .EQU	ADC_PORT=PORTA
 .EQU	ADC_DR=DDRA
 .EQU	ADC_IN=PINA	
@@ -142,7 +145,8 @@ LCD_Init:
 ;LCD_D7..LCD_D4 connect to PA7..PA4
 ;LCD_RS connect to PA0
 ;LCD_RW connect to PA1
-;LCD_EN connect to PA2LCD_Send_Command:
+;LCD_EN connect to PA2
+LCD_Send_Command:
 	push r17
 	call LCD_wait_busy ; check if LCD is busy
 	mov r17,r16 ;save the command
@@ -168,7 +172,8 @@ LCD_Init:
 	nop
 	cbi LCDPORT, LCD_EN
 	pop r17
-	ret
+	ret
+
 LCD_Send_Data:
 	push r17
 	call LCD_wait_busy ;check if LCD is busy
@@ -232,7 +237,8 @@ LCD_wait_busy:
 		pop r16
 	ret
 
-
+
+
 /*
 ;------------
 ;Display
